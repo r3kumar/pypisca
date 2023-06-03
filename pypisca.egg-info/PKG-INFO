@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pypisca
-Version: 0.1
+Version: 0.1.0
 Summary: A simple Python package to download and extract packages from PyPi
 Home-page: https://github.com/r3mkumar/pypisca
 Author: r ramkumar
