@@ -38,8 +38,11 @@ def extract_file(queue, path_to_extract):
         elif filename.endswith('.whl') or filename.endswith('.zip'):
             with zipfile.ZipFile(filename, 'r') as zip_ref:
                 for member in zip_ref.namelist():
-                    zip_ref.extract(member, path_to_extract)
+                    zip_ref.extract(member, path=path_to_extract)
                     print(f'Extracted: {member}')
+        # Delete the file after extraction
+        os.remove(filename)
+        print(f'Deleted: {filename}')
         queue.task_done()
 
 # Take package name as input
