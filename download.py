@@ -10,8 +10,11 @@ def download_file(url, local_filename):
                 f.write(chunk)
     return local_filename
 
+# Take package name as input
+package_name = input("Enter the package name: ")
+
 # Get package information from PyPi
-response = requests.get("https://pypi.org/pypi/Django/json")
+response = requests.get(f"https://pypi.org/pypi/{package_name}/json")
 data = response.json()
 
 # Ensure the directory for the downloads exists
