@@ -3,6 +3,7 @@ import threading
 import requests
 import tarfile
 import zipfile
+import shutil
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor
 from queue import Queue
@@ -45,6 +46,13 @@ def extract_file(queue, path_to_extract):
         print(f'Deleted: {filename}')
         queue.task_done()
 
+def delete_dist_info_dirs(path):
+    for dirpath, dirnames, _ in os.walk(path):
+        for dirname in dirnames:
+            if dirname.endswith('dist-info'):
+                shutil.rmtree(os.path.join(dirpath, dirname))
+                print(f'Deleted directory: {dirname}')
+
 # Take package name as input
 package_name = input("Enter the package name: ")
 
@@ -85,3 +93,6 @@ queue.join()
 # Stop the extractor thread
 queue.put(None)
 extractor_thread.join()
+
+# Delete dist-info directories
+delete_dist_info_dirs(package_dir)
