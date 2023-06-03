@@ -18,7 +18,7 @@ def extract_file(filename, path_to_extract):
             tar.extractall(path=path_to_extract)
     elif filename.endswith('.whl') or filename.endswith('.zip'):
         with zipfile.ZipFile(filename, 'r') as zip_ref:
-            zip_ref.extractall(path_to_extract)
+            zip_ref.extractall(path=path_to_extract)
 
 # Take package name as input
 package_name = input("Enter the package name: ")
@@ -28,7 +28,8 @@ response = requests.get(f"https://pypi.org/pypi/{package_name}/json")
 data = response.json()
 
 # Ensure the directory for the downloads exists
-os.makedirs('downloads', exist_ok=True)
+package_dir = os.path.join('downloads', package_name)
+os.makedirs(package_dir, exist_ok=True)
 
 # Download each file
 for version, files in data['releases'].items():
@@ -36,10 +37,10 @@ for version, files in data['releases'].items():
         # Only download .whl or .tar.gz files
         if file_info['packagetype'] in ['bdist_wheel', 'sdist']:
             url = file_info['url']
-            filename = os.path.join('downloads', url.split('/')[-1])
+            filename = os.path.join(package_dir, url.split('/')[-1])
             print(f'Downloading {url} to {filename}')
             download_file(url, filename)
-            extract_path = os.path.join('downloads', filename.split('.')[0])
+            extract_path = os.path.join(package_dir, filename.split('/')[-1].split('.')[0])
             os.makedirs(extract_path, exist_ok=True)
             print(f'Extracting {filename} to {extract_path}')
             extract_file(filename, extract_path)
