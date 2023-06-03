@@ -1,5 +1,7 @@
 import os
 import requests
+import tarfile
+import zipfile
 
 def download_file(url, local_filename):
     # Stream download to handle big files
@@ -9,6 +11,14 @@ def download_file(url, local_filename):
             for chunk in r.iter_content(chunk_size=8192): 
                 f.write(chunk)
     return local_filename
+
+def extract_file(filename, path_to_extract):
+    if filename.endswith('.tar.gz'):
+        with tarfile.open(filename, 'r:gz') as tar:
+            tar.extractall(path=path_to_extract)
+    elif filename.endswith('.whl') or filename.endswith('.zip'):
+        with zipfile.ZipFile(filename, 'r') as zip_ref:
+            zip_ref.extractall(path_to_extract)
 
 # Take package name as input
 package_name = input("Enter the package name: ")
@@ -29,3 +39,7 @@ for version, files in data['releases'].items():
             filename = os.path.join('downloads', url.split('/')[-1])
             print(f'Downloading {url} to {filename}')
             download_file(url, filename)
+            extract_path = os.path.join('downloads', filename.split('.')[0])
+            os.makedirs(extract_path, exist_ok=True)
+            print(f'Extracting {filename} to {extract_path}')
+            extract_file(filename, extract_path)
