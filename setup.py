@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pypisca",
-    version="0.1.0",
+    version="0.1",
     packages=find_packages(),
     author="r ramkumar",
     author_email="79623032+r3mkumar@users.noreply.github.com",
