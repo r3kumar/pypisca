@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: pypisca
+Version: 0.1
+Summary: A simple Python package to download and extract packages from PyPi
+Home-page: https://github.com/r3mkumar/pypisca
+Author: r ramkumar
+Author-email: 79623032+r3mkumar@users.noreply.github.com
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Description-Content-Type: text/markdown
+
+# pypisca
+pypisca

@@ -1,0 +1,6 @@
+README.md
+setup.py
+pypisca.egg-info/PKG-INFO
+pypisca.egg-info/SOURCES.txt
+pypisca.egg-info/dependency_links.txt
+pypisca.egg-info/top_level.txt
